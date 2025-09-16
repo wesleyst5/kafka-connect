@@ -127,17 +127,18 @@ No **Debezium**, inserts/updates/deletes aparecem imediatamente como eventos no 
 ### Debezium CDC (Postgres)
 ```json
 {
-  "name": "debezium-postgres-source",
+  "name": "debezium-postgres-connector",
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "plugin.name": "pgoutput",
+    "tasks.max": "1",
     "database.hostname": "postgres",
     "database.port": "5432",
     "database.user": "postgres",
     "database.password": "postgres",
     "database.dbname": "testdb",
-    "database.server.name": "dbserver1",
-    "plugin.name": "pgoutput",
-    "slot.name": "debezium_slot",
+    "topic.prefix": "debezium",
+    "slot.name": "debezium_slot_users",
     "publication.autocreate.mode": "filtered",
     "table.include.list": "public.users"
   }
